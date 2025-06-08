@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diabetic Retinopathy Analysis</title>
+  <link rel="stylesheet" href="static/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+     nav {
+    position: fixed;   /* fixed to viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 10000; /* very high so always on top */
+  }
+  
+
+    .section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #222;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+    }
+
+    .steps-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 150px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    #uploadForm {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    #preview-img {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      max-width: 300px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+ <nav class="navbar">
+  <a href="#" class="nav-logo"><h2 class="logo-text">DRD</h2></a>
+  <ul class="nav-menu" style="margin-left: auto;">
+    <li><a href="#home" class="nav-link">HOME</a></li>
+    <li><a href="#about" class="nav-link">ABOUT</a></li>
+    <li><a href="#guide" class="nav-link">GUIDE</a></li>
+    <li><a href="#analyse" class="nav-link">ANALYSE</a></li>
+    <li><a href="#contact" class="nav-link">CONTACT</a></li>
+   
+  </ul>
+</nav>
+
+
+    
+  <!-- Home -->
+  <section id="home" class="section">
+    <img src="/static/logo.jpg" alt="Logo" style="max-width: 150px;" />
+    <h1>Diabetic Retinopathy Detection</h1>
+    <p style="font-size: 1.2rem; color: #555; margin-top: 10px;">
+      Early diagnosis for better vision health
+    </p>
+    <p style="max-width: 600px; margin: 20px auto; color: #666;">
+      Detect diabetic retinopathy early to prevent vision loss with the help of our advanced AI-powered analysis system.
+    </p>
+
+
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <h2>What is Diabetic Retinopathy?</h2>
+    <p>Diabetic retinopathy is a diabetes complication that affects eyes. It's caused by damage to the blood vessels of the light-sensitive tissue at the back of the eye (retina).</p>
+    <p>This website allows early detection using a deep learning model (CNN) based on the ResNet architecture to analyze retinal fundus images and classify the level of diabetic retinopathy.</p>
+        <div style="text-align: center;">
+  <img src="/static/retina.jpg" alt="Retina Image" style="max-width: 780px; width: 100%; height: auto;" />
+</div>
+
+
+  </section>
+
+  <!-- Guide -->
+  <section id="guide" class="section">
+    <h2>Step-by-Step Guide</h2>
+    <div class="steps-container">
+      <div class="step"><div class="icon">📷</div><h3>STEP 1</h3><p>Capture and upload fundus image</p></div>
+      <div class="step"><div class="icon">☁️</div><h3>STEP 2</h3><p>Submit image for cloud analysis</p></div>
+      <div class="step"><div class="icon">👁️</div><h3>STEP 3</h3><p>View results and export PDF</p></div>
+    </div>
+  </section>
+
+  <!-- Analyse -->
+  <section id="analyse" class="section">
+    <h2>Analyse Fundus Image</h2>
+    <form id="uploadForm">
+      <input type="text" id="name" name="name" placeholder="Full Name" required />
+      <input type="number" id="age" name="age" placeholder="Age" required />
+      <select id="gender" name="gender" required>
+        <option value="" disabled selected>Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <input type="file" id="imageInput" name="file" accept="image/*" required />
+      <button type="submit">Get Prediction</button>
+    </form>
+    <img id="preview-img" src="" alt="Image Preview" />
+    <div id="result"></div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section" style="max-width: 600px; margin: 0 auto;">
+    <h2>Contact</h2>
+    <p><strong>Department of Computer Science & Engineering</strong><br />
+      Dr. T. Thimmaiah Institute of Technology</p>
+    <ul style="list-style: none; padding: 0;">
+      <li><strong>Chetan Ganesha</strong> — <a href="mailto:cc9113939@gmail.com">cc9113939@gmail.com</a></li>
+      <li><strong>Hemanth Vasu</strong> — <a href="mailto:hemanthvasu41468@gmail.com">hemanthvasu41468@gmail.com</a></li>
+      <li><strong>Sanjay A</strong> — <a href="mailto:sanjay2003j03@gmail.com">shagufthashabbir@gmail.com</a></li>
+      <li><strong>Shambhavi V</strong> — <a href="mailto:shambhaviv7@gmail.com">shambhaviv7@gmail.com</a></li>
+    </ul>
+  </section>
+
+  <!-- Script -->
+  <script>
+    const form = document.getElementById("uploadForm");
+    const imageInput = document.getElementById("imageInput");
+    const resultText = document.getElementById("result");
+    const previewImg = document.getElementById("preview-img");
+
+    // Show image preview
+    imageInput.onchange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          previewImg.src = reader.result;
+          previewImg.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // Handle form submission
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const file = imageInput.files[0];
+      const name = document.getElementById("name").value;
+      const age = document.getElementById("age").value;
+      const gender = document.getElementById("gender").value;
+
+      if (!file || !name || !age || !gender) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      resultText.textContent = "Analyzing...";
+
+      try {
+        const res = await fetch("/predict/", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.prediction) {
+          const prediction = data.prediction;
+          resultText.textContent = `Prediction: ${prediction}`;
+
+          const reportRes = await fetch(`/download_report/?result=${encodeURIComponent(prediction)}&name=${encodeURIComponent(name)}&age=${encodeURIComponent(age)}&gender=${encodeURIComponent(gender)}`);
+          const blob = await reportRes.blob();
+          const url = window.URL.createObjectURL(blob);
+
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "DR_Report.pdf"; // Force PDF download
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        } else {
+          resultText.textContent = "Error: " + (data.error || "Unknown error.");
+        }
+      } catch (err) {
+        resultText.textContent = "Request failed.";
+        console.error(err);
+      }
+    };
+  </script>
+
+</body>
+</html>
